@@ -57,6 +57,30 @@ public class FlashCardBuilder {
         JLabel answerLabel = new JLabel("Answer");
 
 
+        // Menu Bar
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenue = new JMenu("File");
+
+        JMenuItem newMenuItem = new JMenuItem("New");
+        JMenuItem saveMenuItem = new JMenuItem("Save");
+
+        // Event Listener's
+        nextButton.addActionListener(new NextCardListener());
+        newMenuItem.addActionListener(new NewMenuActionListener());
+        saveMenuItem.addActionListener(new SaveMenuActionListener());
+
+        // Add to Menu
+        menuBar.add(fileMenue);
+        fileMenue.add(newMenuItem);
+        fileMenue.add(saveMenuItem);
+
+
+        // Add to the Frame
+        mFrame.getContentPane().add(BorderLayout.CENTER, mPanel);
+        mFrame.setSize(500, 500);
+        mFrame.setVisible(true);
+        mFrame.setJMenuBar(menuBar);
+
         // Add components to mPanel
         mPanel.add(questionLabel);
         mPanel.add(questionScrollPane);
@@ -64,13 +88,6 @@ public class FlashCardBuilder {
         mPanel.add(answerJScrollPane);
         mPanel.add(nextButton);
 
-        // Add Button to Event Listener
-        nextButton.addActionListener(new NextCardListener());
-
-        // Add to the Frame
-        mFrame.getContentPane().add(BorderLayout.CENTER, mPanel);
-        mFrame.setSize(500, 500);
-        mFrame.setVisible(true);
 
     }
 
@@ -79,7 +96,25 @@ public class FlashCardBuilder {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            System.out.println("Button Clicked");
+            System.out.println("Next Button clicked");
+        }
+    }
+
+    private class NewMenuActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            System.out.println("New Menu Item clicked!");
+
+        }
+    }
+
+    private class SaveMenuActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            System.out.println("Save Menu Item clicked!");
+
         }
     }
 
@@ -92,6 +127,5 @@ public class FlashCardBuilder {
             }
         });
     }
-
 
 }
