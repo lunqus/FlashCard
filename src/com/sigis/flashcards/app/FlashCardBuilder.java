@@ -2,6 +2,8 @@ package com.sigis.flashcards.app;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class FlashCardBuilder {
@@ -62,11 +64,23 @@ public class FlashCardBuilder {
         mPanel.add(answerJScrollPane);
         mPanel.add(nextButton);
 
+        // Add Button to Event Listener
+        nextButton.addActionListener(new NextCardListener());
+
         // Add to the Frame
         mFrame.getContentPane().add(BorderLayout.CENTER, mPanel);
         mFrame.setSize(500, 500);
         mFrame.setVisible(true);
 
+    }
+
+    private class NextCardListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            System.out.println("Button Clicked");
+        }
     }
 
     public static void main(String[] args) {
@@ -78,5 +92,6 @@ public class FlashCardBuilder {
             }
         });
     }
+
 
 }
