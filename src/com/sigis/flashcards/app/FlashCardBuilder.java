@@ -52,10 +52,12 @@ public class FlashCardBuilder {
         // Create Button
         JButton nextButton = new JButton("Next Card");
 
+        // Instantiate Array List
+        cardList = new ArrayList<FlashCard>();
+
         // Create Labels
         JLabel questionLabel = new JLabel("Question");
         JLabel answerLabel = new JLabel("Answer");
-
 
         // Menu Bar
         JMenuBar menuBar = new JMenuBar();
@@ -96,7 +98,11 @@ public class FlashCardBuilder {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            System.out.println("Next Button clicked");
+            // Create Flash Card
+            FlashCard card = new FlashCard(question.getText(), answer.getText());
+            cardList.add(card);
+            clearCard();
+            System.out.println(card.getQuestion() + ", Size: " + cardList.size());
         }
     }
 
@@ -116,6 +122,12 @@ public class FlashCardBuilder {
             System.out.println("Save Menu Item clicked!");
 
         }
+    }
+
+    private void clearCard() {
+        question.setText("");
+        answer.setText("");
+        question.requestFocus(); // Focus cursor on the question
     }
 
     public static void main(String[] args) {
