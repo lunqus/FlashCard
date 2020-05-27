@@ -4,7 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class FlashCardBuilder {
 
@@ -119,7 +123,15 @@ public class FlashCardBuilder {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            System.out.println("Save Menu Item clicked!");
+            // System.out.println("Save Menu Item clicked!");
+
+            FlashCard card = new FlashCard(question.getText(), answer.getText());
+            cardList.add(card);
+
+            // File dialog with file chooser
+            JFileChooser fileSave = new JFileChooser();
+            fileSave.showSaveDialog(mFrame);
+            saveFile(fileSave.getSelectedFile());
 
         }
     }
@@ -128,6 +140,33 @@ public class FlashCardBuilder {
         question.setText("");
         answer.setText("");
         question.requestFocus(); // Focus cursor on the question
+    }
+
+
+    private void saveFile(File selectedFile) {
+
+        try {
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter(selectedFile));
+
+            Iterator<FlashCard> cardIterator = cardList.iterator();
+            while(cardIterator.hasNext()) {
+                FlashCard card = (FlashCard) cardIterator.next();
+                bw.write(card.getQuestion() + "/");
+                bw.write(card.getAnswer() + "\n");
+
+            }
+
+            bw.close();
+
+//                for (FlashCard card : cardList) {
+//                    bw.write(card.getQuestion() + "/");
+//                    bw.write(card.getAnswer() + "\n");
+//                }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
