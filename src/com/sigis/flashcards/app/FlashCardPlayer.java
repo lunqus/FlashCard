@@ -103,6 +103,10 @@ public class FlashCardPlayer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Show the first Card
+        cardIterator = cardList.iterator();
+        showNextCard();
     }
 
     private void makeCard(String lineToParce) {
@@ -118,6 +122,16 @@ public class FlashCardPlayer {
         System.out.println("Made a Card");
 
     }
+
+    private void showNextCard() {
+
+        currentCard = (FlashCard) cardIterator.next();
+
+        display.setText(currentCard.getQuestion());
+        showAnswer.setText("Show Answer");
+        isShowAnswer = true;
+    }
+
 
     public static void main(String[] args) {
 
