@@ -72,6 +72,20 @@ public class FlashCardPlayer {
         @Override
         public void actionPerformed(ActionEvent e) {
 
+            if (isShowAnswer) {
+                display.setText(currentCard.getAnswer());
+                showAnswer.setText("Next Card");
+                isShowAnswer = false;
+            } else {
+
+                if(cardIterator.hasNext()) {
+                    showNextCard();
+                } else {
+                    display.setText("That was last card.");
+                    showAnswer.setEnabled(false);
+                }
+            }
+
         }
     }
 
