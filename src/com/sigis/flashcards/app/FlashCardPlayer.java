@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.StringTokenizer;
 
 public class FlashCardPlayer {
 
@@ -106,11 +107,16 @@ public class FlashCardPlayer {
 
     private void makeCard(String lineToParce) {
 
-        String[] result = lineToParce.split("/");
+        StringTokenizer result = new StringTokenizer(lineToParce, "/");
 
-        FlashCard card = new FlashCard(result[0], result[1]);
+
+        // String[] result = lineToParce.split("/");
+        //FlashCard card = new FlashCard(result[0], result[1]);
+
+        FlashCard card = new FlashCard(result.nextToken(), result.nextToken());
         cardList.add(card);
         System.out.println("Made a Card");
+
     }
 
     public static void main(String[] args) {
